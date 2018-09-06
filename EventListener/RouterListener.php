@@ -63,11 +63,9 @@ class RouterListener implements EventSubscriberInterface
             }
 
             $response = $this->legacyKernel->handle($event->getRequest(), $event->getRequestType(), true);
-            if ($response->getStatusCode() !== 404) {
-                $event->setResponse($response);
+            $event->setResponse($response);
 
-                return $event;
-            }
+            return $event;
         }
     }
 

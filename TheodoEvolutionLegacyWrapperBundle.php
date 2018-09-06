@@ -12,28 +12,11 @@ use Theodo\Evolution\Bundle\LegacyWrapperBundle\DependencyInjection\Compiler\Rep
 class TheodoEvolutionLegacyWrapperBundle extends Bundle
 {
     /**
-     * @var \Composer\Autoload\ClassLoader
-     */
-    private $loader;
-
-    /**
-     * @param ClassLoader $loader
-     */
-    public function __construct(ClassLoader $loader = null)
-    {
-        $this->loader = $loader;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
     {
-        // The loader can be null when clearing the cache.
-        if (null !== $this->loader) {
-            $container->addCompilerPass(new LoaderInjectorPass($this->loader));
-        }
-
+        $container->addCompilerPass(new LoaderInjectorPass());
         $container->addCompilerPass(new KernelConfigurationPass());
         $container->addCompilerPass(new ReplaceRouterPass());
     }

@@ -1,7 +1,7 @@
 <?php
 
 namespace Theodo\Evolution\Bundle\LegacyWrapperBundle\DependencyInjection\Compiler;
-use Composer\Autoload\ClassLoader;
+
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -14,19 +14,6 @@ use Symfony\Component\DependencyInjection\Reference;
 class LoaderInjectorPass implements CompilerPassInterface
 {
     /**
-     * @var \Composer\Autoload\ClassLoader
-     */
-    private $loader;
-
-    /**
-     * @param ClassLoader $loader
-     */
-    public function __construct(ClassLoader $loader)
-    {
-        $this->loader = $loader;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
@@ -37,5 +24,4 @@ class LoaderInjectorPass implements CompilerPassInterface
             $container->getDefinition($id)->addMethodCall('setLoader', array(new Reference('composer.loader')));
         }
     }
-
 }

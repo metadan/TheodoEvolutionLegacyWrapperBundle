@@ -23,6 +23,11 @@ To do so you will have to create a ``class loader`` which must implement the
     class MyLegacyClassLoader implements LegacyClassLoaderInterface
     {
         /**
+         * @var boolean
+         */
+        private $isAutoloaded = false;
+
+        /**
          * @var LegacyKernelInterface
          */
         private $kernel;
