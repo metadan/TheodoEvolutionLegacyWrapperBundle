@@ -66,7 +66,7 @@ class Configuration implements ConfigurationInterface
         }
 
 
-        $node
+        $rootNode
             ->example('theodo_evolution_legacy_wrapper.legacy_kernel.symfony14')
             ->beforeNormalization()
                 ->ifString()
@@ -112,6 +112,6 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        return $node;
+        return $rootNode;
     }
 }
