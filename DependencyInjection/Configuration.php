@@ -17,8 +17,13 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('theodo_evolution_legacy_wrapper');
+        $treeBuilder = new TreeBuilder('theodo_evolution_legacy_wrapper');
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $rootNode = $treeBuilder->root('theodo_evolution_legacy_wrapper');
+        }
 
         $rootNode
             ->children()
@@ -52,8 +57,14 @@ class Configuration implements ConfigurationInterface
 
     public function addKernelNode()
     {
-        $builder = new TreeBuilder();
-        $node = $builder->root('kernel');
+        $treeBuilder = new TreeBuilder('kernel');
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $rootNode = $treeBuilder->root('kernel');
+        }
+
 
         $node
             ->example('theodo_evolution_legacy_wrapper.legacy_kernel.symfony14')
